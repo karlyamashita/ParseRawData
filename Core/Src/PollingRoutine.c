@@ -38,6 +38,7 @@ void UART_Parse(UartBufferStruct *msg)
 	char *token3;
 	char *token4;
 	char *rest;
+	char delim[] = ";,\n";
 	static int package_nr = 0;
 	char str[UART_TX_BYTE_BUFFER_SIZE] = {0};
 
@@ -56,10 +57,10 @@ void UART_Parse(UartBufferStruct *msg)
 		else if(strncmp(ptr, "P", strlen("P")) == 0)
 		{
 			rest = ptr;
-			token = strtok_r(rest, ";", &rest);
-			token2 = strtok_r(rest, ",", &rest);
-			token3 = strtok_r(rest, ",", &rest);
-			token4 = strtok_r(rest, "\n", &rest);
+			token = strtok_r(rest, delim, &rest);
+			token2 = strtok_r(rest, delim, &rest);
+			token3 = strtok_r(rest, delim, &rest);
+			token4 = strtok_r(rest, delim, &rest);
 
 			if (package_nr++ == 0)
 			{
